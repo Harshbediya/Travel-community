@@ -1,0 +1,17 @@
+django>=5.0
+djangorestframework
+django-cors-headers
+django-filter
+django-decouple
+djangorestframework-simplejwt
+whitenoise
+gunicorn
+daphne
+channels
+cloudinary
+django-cloudinary-storage
+psycopg2-binary
+uuid
+framer-motion
+lucide-react
+axios
