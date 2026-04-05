@@ -6,9 +6,10 @@ def seed_data(apps, schema_editor):
     Destination = apps.get_model('destinations', 'Destination')
     Hotel = apps.get_model('destinations', 'Hotel')
 
-    # Seed Destinations
+    # Seed Destinations (Manually adding slugs because save() override doesn't run in migrations)
     dest1 = Destination.objects.create(
         name='Paris, France',
+        slug='paris-france',
         city='Paris',
         country='France',
         description='The city of lights, known for the Eiffel Tower, Louvre museum, and romantic atmosphere.',
@@ -20,6 +21,7 @@ def seed_data(apps, schema_editor):
 
     dest2 = Destination.objects.create(
         name='Goa, India',
+        slug='goa-india',
         city='Goa',
         country='India',
         description='Famous for its beaches, night life, and historic architecture. A paradise for beach lovers.',
@@ -31,6 +33,7 @@ def seed_data(apps, schema_editor):
 
     dest3 = Destination.objects.create(
         name='Manali, India',
+        slug='manali-india',
         city='Manali',
         country='India',
         description='A high-altitude Himalayan resort town known as a honeymoon destination and backpacking hub.',
