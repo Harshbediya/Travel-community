@@ -165,9 +165,13 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Add production URL from environment variable
-CORS_LIVE_URL = config('FRONTEND_URL', default=None)
-if CORS_LIVE_URL:
+CORS_LIVE_URL = config('FRONTEND_URL', default='')
+if CORS_LIVE_URL and CORS_LIVE_URL != '':
     CORS_ALLOWED_ORIGINS.append(CORS_LIVE_URL)
+else:
+    # Fallback to avoid empty lists or issues during initial build
+    # You can remove this once FRONTEND_URL is set in Render
+    pass
 
 CORS_ALLOW_CREDENTIALS = True
 
