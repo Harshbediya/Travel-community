@@ -158,13 +158,16 @@ MEDIA_URL = '/media/'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CSRF settings for production
+# Security settings for production
 CSRF_TRUSTED_ORIGINS = [
     'https://travel-community-3r0z.onrender.com',
 ]
 
-# Build command note (to use in Render): 
-# pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --no-input
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+]
 
 # Add production URL from environment variable
 CORS_LIVE_URL = config('FRONTEND_URL', default='')
