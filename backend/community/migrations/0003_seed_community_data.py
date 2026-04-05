@@ -8,6 +8,10 @@ def seed_community_data(apps, schema_editor):
     # Get the admin user we created or any user
     admin_user = User.objects.filter(is_superuser=True).first()
     if not admin_user:
+        # Fallback to any user if admin not found (e.g. initial dev)
+        admin_user = User.objects.first()
+    
+    if not admin_user:
         return
 
     # Get destinations for linking
@@ -42,7 +46,7 @@ def seed_community_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('community', '0001_initial'),
+        ('community', '0002_post_category'),  # Changed from 0001 to 0002 to avoid conflict
         ('destinations', '0003_seed_data'),
         ('users', '0003_create_superuser_final_fix'),
     ]
