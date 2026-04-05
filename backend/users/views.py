@@ -8,6 +8,7 @@ from .models import User
 from admin_dashboard.models import AuditLog
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from django.utils import timezone
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -54,20 +55,24 @@ class LoginView(APIView):
                     ip_address=get_client_ip(request)
                 )
             
-            # Send login event to WebSocket
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                "admin_dashboard",
-                {
-                    "type": "send_login_event",
-                    "message": {
-                        "username": user.username,
-                        "timestamp": timezone.now().isoformat(),
-                        "ip_address": get_client_ip(request),
-                        "device_info": request.META.get('HTTP_USER_AGENT', 'Unknown Device')
+            # Send login event to WebSocket (wrapped in try-except to prevent 500 errors)
+            try:
+                channel_layer = get_channel_layer()
+                async_to_sync(channel_layer.group_send)(
+                    "admin_dashboard",
+                    {
+                        "type": "send_login_event",
+                        "message": {
+                            "username": user.username,
+                            "timestamp": timezone.now().isoformat(),
+                            "ip_address": get_client_ip(request),
+                            "device_info": request.META.get('HTTP_USER_AGENT', 'Unknown Device')
+                        },
                     },
-                },
-            )
+                )
+            except Exception:
+                # Silently fail notification errors to let the user login
+                pass
 
             return Response({
                 'user': UserSerializer(user).data,
