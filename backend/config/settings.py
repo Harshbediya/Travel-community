@@ -148,11 +148,7 @@ STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
 }
-WHITENOISE_MANIFEST_STRICT = False
 
 # Cloudinary Storage
 CLOUDINARY_STORAGE = {
