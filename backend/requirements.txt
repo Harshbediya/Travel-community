@@ -1,8 +1,9 @@
-django>=5.0
+django==5.0.6
 djangorestframework
 django-cors-headers
 django-filter
 django-decouple
+python-decouple
 dj-database-url
 psycopg2-binary
 djangorestframework-simplejwt
@@ -10,10 +11,7 @@ whitenoise
 gunicorn
 daphne
 channels
+channels_redis
 cloudinary
 django-cloudinary-storage
-psycopg2-binary
-uuid
-framer-motion
-lucide-react
-axios
+
