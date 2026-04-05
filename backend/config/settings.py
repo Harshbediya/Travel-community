@@ -161,6 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Security settings for production
 CSRF_TRUSTED_ORIGINS = [
     'https://travel-community-3r0z.onrender.com',
+    'https://travel-community-inky.vercel.app',
 ]
 
 CORS_ALLOWED_ORIGINS = [
